@@ -1,14 +1,10 @@
 import LexLib
 
-value = "aaa=as1>=22;;"  # input()
+value = input("Please input string to check: ")
+
 
 try:
-    states = LexLib.iterateString(value)
-
-    string, ident = LexLib.iterateStates(states, value)
-
-    print()
-    print(string, ident)
+    print(LexLib.iterateStates(LexLib.iterateString(value), value))
 
 except TypeError as err:
     print(err)

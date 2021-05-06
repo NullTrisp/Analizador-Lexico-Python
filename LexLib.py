@@ -20,7 +20,7 @@ def iterateString(string):
         elif char == "!":
             inputColumns.append(8)
         else:
-            raise TypeError("\n\n\nInvalid symbol: '" + char + "'")
+            raise TypeError("\n\nInvalid symbol: '" + char + "'")
     return inputColumns
 
 
@@ -31,25 +31,25 @@ def iterateStates(columns, string):
     currentState = 0
     id = ""
     for i in range(0, stringLen):
-        currentState = LexData.tStates[currentState][columns[i]]
+        currentState = LexData.statesTable[currentState][columns[i]]
         id += string[i]
 
         if i == stringLen - 1:
-            if LexData.tStates[currentState][1] == 1:
+            if LexData.statesTable[currentState][1] == 1:
                 res.append(id)
                 id = ""
 
-                ident.append(LexData.isStates[currentState - 1])
+                ident.append(LexData.identifiers[currentState - 1])
                 currentState = 0
 
             else:
-                raise TypeError("\n\n\nInvalid symbol: '" + string[i] + "'")
+                raise TypeError("\n\nInvalid symbol: '" + string[i] + "'")
         else:
-            if LexData.tStates[currentState][1] == 1 and (LexData.tStates[currentState][columns[i + 1]] < 0):
+            if LexData.statesTable[currentState][1] == 1 and (LexData.statesTable[currentState][columns[i + 1]] < 0):
                 res.append(id)
                 id = ""
 
-                ident.append(LexData.isStates[currentState - 1])
+                ident.append(LexData.identifiers[currentState - 1])
                 currentState = 0
 
     return res, ident

@@ -28,7 +28,7 @@ identifiers = ["<TERM>",
 
 
 class Lex:
-    def __init__(self, value):
+    def __init__(self, value: str):
         self.value = value
         self.inputColumns = []
         self.res = []

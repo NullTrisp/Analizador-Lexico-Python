@@ -19,7 +19,7 @@ identifiers = ["<TERM>",
                "<num>",
                "<eqTo>",
                "<GreatT>",
-               "<LessT",
+               "<LessT>",
                " ",
                "<EqualT>",
                "<GreEqT>",
@@ -33,6 +33,7 @@ class Lex:
         self.inputColumns = []
         self.res = []
         self.ident = []
+        self.iterateString().iterateStates()
 
     def getResult(self):
         return self.res

@@ -1,3 +1,6 @@
+from LEX.LexError import LexError
+
+
 statesTable = [
     # q, T, ;, a1, 1, =, >, <, !
     [0, 0, 1, 2, 3, 4, 5, 6, 7],
@@ -36,12 +39,15 @@ class Lex:
         self.iterateString().iterateStates()
 
     def getResult(self):
+        """method to get result string"""
         return self.res
 
     def getIdent(self):
+        """method to indentificadores result string"""
         return self.ident
 
     def iterateString(self):
+        """method to iterate the whole string and get input columns"""
         for char in self.value:
             asciiValue = ord(char)
             if char == ";":
@@ -59,10 +65,11 @@ class Lex:
             elif char == "!":
                 self.inputColumns.append(8)
             else:
-                raise TypeError("\n\nInvalid symbol: '" + char + "'")
+                raise LexError("Invalid symbol: '" + char + "'")
         return self
 
     def iterateStates(self):
+        """method to iterate the states and get Lex result"""
         stringLen = len(self.value)
         currentState = 0
         id = ""
@@ -80,8 +87,8 @@ class Lex:
                     currentState = 0
 
                 else:
-                    raise TypeError("\n\nInvalid symbol: '" +
-                                    self.value[i] + "'")
+                    raise LexError("Invalid symbol: '" +
+                                   self.value[i] + "'")
             else:
                 if statesTable[currentState][1] == 1 and (statesTable[currentState][self.inputColumns[i + 1]] < 0):
                     self.res.append(id)

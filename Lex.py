@@ -32,6 +32,7 @@ identifiers = ["<TERM>",
 
 class Lex:
     def __init__(self, value: str):
+        print("Lex:")
         self.value = value
         self.inputColumns = []
         self.res = []
@@ -89,6 +90,9 @@ class Lex:
                 else:
                     raise LexError("Invalid symbol: '" +
                                    self.value[i] + "'")
+
+                print(self.ident)
+                print(self.res, end="\n\n")
             else:
                 if statesTable[currentState][1] == 1 and (statesTable[currentState][self.inputColumns[i + 1]] < 0):
                     self.res.append(id)
@@ -96,4 +100,8 @@ class Lex:
 
                     self.ident.append(identifiers[currentState - 1])
                     currentState = 0
+                if len(self.ident) > 0:
+                    
+                    print(self.ident)
+                    print(self.res, end="\n\n")
         return self
